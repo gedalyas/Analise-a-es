@@ -1,0 +1,51 @@
+#:kivy 2.3.0
+#:import dp kivy.metrics.dp
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: dp(12)
+    spacing: dp(8)
+
+    BoxLayout:
+        size_hint_y: None
+        height: dp(44)
+        spacing: dp(8)
+
+        TextInput:
+            id: ticker_input
+            text: "BBAS3"
+            hint_text: "Ticker (ex.: BBAS3, AAPL)"
+            multiline: False
+
+        Spinner:
+            id: period_spinner
+            text: "6mo"
+            values: ["1mo","3mo","6mo","1y","2y"]
+            size_hint_x: None
+            width: dp(100)
+
+        Button:
+            id: analyze_btn
+            text: "Analisar"
+            on_press: app.on_analyze()
+
+    Label:
+        text: app.status
+        size_hint_y: None
+        height: dp(24)
+        color: 0,0,0,1
+
+    # ====== ÁREA DO GRÁFICO COM SCROLL ======
+    ScrollView:
+        id: plot_scroll
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: dp(6)
+
+        BoxLayout:
+            id: plot_container
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: 0
+            spacing: 0
